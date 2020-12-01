@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Usar_Mostrar_contenido_ensamblado</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mostrar contenido ensamblado\Mostrar contenido ensamblado.csproj" />
+  </ItemGroup>
+
+</Project>
