@@ -4,20 +4,21 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>gsUtilidadesNET</RootNamespace>
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.2</Version>
     <Description>Mostrar información del contenido de un ensamblado de .NET
 Versión para 64 bits (x64)
 
 (para .NET 5.0 revisión del 02-dic-2020)
 
-v1.0.0.1 (02-dic-20) Se muestran las interfaces y enumeraciones</Description>
+v1.0.0.2 (02-dic-20) Creo la versión para VB a partir de la v1.0.0.1 de C# usando el conversor CSharpToVB de Paul1956 (con un par de cambios)</Description>
     <Company>elGuille</Company>
     <Authors>Guillermo Som (elGuille)</Authors>
     <Copyright>Copyright Guillermo Som (elGuille), 2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>visual-basic vb c# dotnet net-core net-5 class-library utils utilidades reflection assembly</PackageTags>
-    <PackageReleaseNotes>v1.0.0.1 (02-dic-20) Se muestran las interfaces y enumeraciones
+    <PackageReleaseNotes>v1.0.0.2 (02-dic-20) Creo la versión para VB a partir de la v1.0.0.1 de C# usando el conversor CSharpToVB de Paul1956 (con un par de cambios)
+v1.0.0.1 (02-dic-20) Se muestran las interfaces y enumeraciones
 v1.0.0.0 (01-dic-20) Primera compilación</PackageReleaseNotes>
     <NeutralLanguage>Spanish (Spain)</NeutralLanguage>
     <Platforms>AnyCPU;x64</Platforms>

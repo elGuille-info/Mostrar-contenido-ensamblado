@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Usar_Mostrar_contenido_ensamblado</RootNamespace>
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

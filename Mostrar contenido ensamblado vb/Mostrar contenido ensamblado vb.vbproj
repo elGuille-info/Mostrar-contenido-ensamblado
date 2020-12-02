@@ -2,18 +2,36 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Mostrar_contenido_ensamblado_vb</RootNamespace>
+    <RootNamespace>gsUtilidadesNET</RootNamespace>
     <TargetFramework>net5.0</TargetFramework>
-    <Authors>Guillermo Som</Authors>
+    <Authors>Guillermo Som (elGuille)</Authors>
     <Company>elGuille</Company>
+    <Description>Mostrar información del contenido de un ensamblado de .NET
+Versión para 64 bits (x64)
+
+(para .NET 5.0 revisión del 02-dic-2020)
+
+v1.0.0.2 (02-dic-20) Creo la versión para VB a partir de la v1.0.0.1 de C# usando el conversor CSharpToVB de Paul1956 (con un par de cambios)</Description>
+    <Version>1.0.0.2</Version>
+    <Copyright>Copyright Guillermo Som (elGuille), 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/elGuille-info/Mostrar-contenido-ensamblado</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>visual-basic vb c# dotnet net-core net-5 class-library utils utilidades reflection assembly</PackageTags>
+    <NeutralLanguage>Spanish (Spain)</NeutralLanguage>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <PackageReleaseNotes>v1.0.0.2 (02-dic-20) Creo la versión para VB a partir de la v1.0.0.1 de C# usando el conversor CSharpToVB de Paul1956 (con un par de cambios)</PackageReleaseNotes>
+    <OptionStrict>On</OptionStrict>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
 
 </Project>

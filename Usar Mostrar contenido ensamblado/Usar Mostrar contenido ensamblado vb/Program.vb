@@ -21,7 +21,7 @@ Imports gsUtilidadesNET
 
 Module Program
     Sub Main(args As String())
-        InfoEnsamblado.MostrarAyuda(True, False)
+        gsUtilidadesNET.InfoEnsamblado.MostrarAyuda(True, False)
 
         Dim dirDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
         Dim fic = System.IO.Path.Combine(dirDocs, "Contenido gsUtilidadesNET.dll.txt")
@@ -33,20 +33,20 @@ Module Program
             argsDll = args
         End If
 
-        Dim info = InfoEnsamblado.GuardarInfo(argsDll, fic)
+        Dim info = gsUtilidadesNET.InfoEnsamblado.GuardarInfo(argsDll, fic)
 
         If info Then
             Console.WriteLine("Todo OK.")
             Console.WriteLine($"Contenido guardado en: {fic}")
         Else
-            Console.WriteLine($"Error {InfoEnsamblado.ReturnValue}")
+            Console.WriteLine($"Error {gsUtilidadesNET.InfoEnsamblado.ReturnValue}")
             Console.WriteLine()
 
             ' Para no mostrar por la consola y tener el contenido en una variable
             'Dim infoRun = InfoEnsamblado.MostrarAyuda(False, False)
             'Console.WriteLine(infoRun)
 
-            InfoEnsamblado.MostrarAyuda(True, False)
+            gsUtilidadesNET.InfoEnsamblado.MostrarAyuda(True, False)
             Console.WriteLine("Los parámetros que se pueden usar son:")
             Console.WriteLine()
 

@@ -1,7 +1,7 @@
 '-----------------------------------------------------------------------------
 ' Mostrar contenido de clases usando Reflection versión de C#      (01/Dic/20)
 '
-' Convertido de C# a VB con CS2VB de Paul1956
+' Convertido de C# a VB con CSharpToVB de Paul1956
 '   No pone Option Infer On y en los bucles no indica el tipo de datos
 '   Main lo ha declarado como Private
 '
@@ -32,10 +32,11 @@ Namespace gsUtilidadesNET
         Shared mostrarPropiedades As Boolean
         Shared verbose As Boolean
         Shared mostrarMetodos As Boolean
-        'private static int returnValue;
+
         Public Shared Property ReturnValue As Integer
+
         Shared Function Main(args As String()) As Integer
-            Console.WriteLine("Mostrar el contenido de una clase usando Reflection. [Versión para C#]")
+            Console.WriteLine("Mostrar el contenido de una clase usando Reflection. [Versión para VB]")
             Console.WriteLine()
 
             Console.WriteLine(InfoTipo(args), False)
@@ -45,6 +46,7 @@ Namespace gsUtilidadesNET
 
             Return ReturnValue
         End Function
+
         ''' <summary>
         ''' Guardar la información del ensamblado indicado en los argumentos
         ''' (los mismos que si se ejecuta desde la línea de comandos).
@@ -67,6 +69,7 @@ Namespace gsUtilidadesNET
 
             Return True
         End Function
+
         ''' <summary>
         ''' Devuelve la información del ensamblado indicado.
         ''' Se aceptan los mísmos argumentos que en la llamada desde la línea de comandos.
@@ -230,6 +233,7 @@ Namespace gsUtilidadesNET
             ReturnValue = 0
             Return sb.ToString().TrimEnd()
         End Function
+
         Private Shared Function MostrarInfoTipo(sb As StringBuilder, indent As Integer, t As Type) As Integer
             If mostrarClases OrElse mostrarTodo Then
                 If t.IsEnum Then
@@ -463,6 +467,7 @@ Namespace gsUtilidadesNET
 
             Return indent
         End Function
+
         ''' <summary>
         ''' Mostrar la ayuda de este programa.
         ''' </summary>
@@ -519,9 +524,11 @@ Valores devueltos:
 
             Return ayudaMsg
         End Function
+
         Shared ProductName As String
         Shared ProductVersion As String
         Shared FileVersion As String
+
         Private Shared Function VersionInfo() As String
             Dim ensamblado As System.Reflection.Assembly = Assembly.GetExecutingAssembly()
             Dim fvi As System.Diagnostics.FileVersionInfo = FileVersionInfo.GetVersionInfo(ensamblado.Location)
