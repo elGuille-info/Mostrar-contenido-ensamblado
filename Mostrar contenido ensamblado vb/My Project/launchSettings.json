@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Mostrar contenido ensamblado vb": {
+      "commandName": "Project",
+      "commandLineArgs": "\"E:\\gsCodigo_00\\Visual Studio\\net core\\gsUtilidadesNET\\gsUtilidadesNET\\bin\\Debug\\net5.0-windows\\gsUtilidadesNET.dll\" -c -m"
+    }
+  }
+}

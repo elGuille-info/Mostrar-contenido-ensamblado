@@ -15,7 +15,7 @@ namespace Usar_Mostrar_contenido_ensamblado
     {
         static void Main(string[] args)
         {
-            InfoEnsamblado.MostrarAyuda(true, false);
+            _ = InfoEnsamblado.MostrarAyuda(true, false);
 
             var dirDocs = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var fic = System.IO.Path.Combine(dirDocs, "Contenido gsUtilidadesNET.dll.txt");
@@ -43,7 +43,7 @@ namespace Usar_Mostrar_contenido_ensamblado
                 //var infoRun = InfoEnsamblado.MostrarAyuda(false, false);
                 //Console.WriteLine(infoRun);
 
-                InfoEnsamblado.MostrarAyuda(true, false);
+                _ = InfoEnsamblado.MostrarAyuda(true, false);
                 Console.WriteLine();
             }
             Console.WriteLine();

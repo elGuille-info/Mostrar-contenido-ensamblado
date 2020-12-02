@@ -3,7 +3,7 @@
     "Mostrar contenido de clases cs": {
       "commandName": "Executable",
       "executablePath": "E:\\gsCodigo_00\\Visual Studio\\net core\\Mostrar contenido ensamblado usando reflection\\Mostrar contenido ensamblado\\bin\\x64\\Debug\\net5.0\\Mostrar contenido ensamblado.exe",
-      "commandLineArgs": "\"E:\\gsCodigo_00\\Visual Studio\\net core\\gsUtilidadesNET\\bin\\Debug\\net5.0-windows\\gsUtilidadesNET.dll\" -c -m"
+      "commandLineArgs": "\"E:\\gsCodigo_00\\Visual Studio\\net core\\gsUtilidadesNET\\gsUtilidadesNET\\bin\\Debug\\net5.0-windows\\gsUtilidadesNET.dll\" -c -m"
     }
   }
 }
