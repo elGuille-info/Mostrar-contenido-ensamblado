@@ -50,6 +50,7 @@ namespace gsUtilidadesNET
         /// <param name="fic">El nombre del fichero donde se guardará la información.</param>
         /// <returns>Devuelve True si todo fue bien, false si hubo errores.</returns>
         /// <remarks>El tipo de error se averigua con InfoEnsamblado.ReturnValue</remarks>
+        /// <remarks>El formato usado para guardar es Latin1</remarks>
         public static bool GuardarInfo(string[] args, string fic)
         {
             var res = InfoTipo(args);
@@ -257,10 +258,44 @@ namespace gsUtilidadesNET
 
         static int MostrarInfoTipo(StringBuilder sb, int indent, Type t)
         {
-            //indent = 20;
             if (mostrarClases || mostrarTodo)
             {
-                sb.AppendLine($"Clase: {t.Name}");
+                if (t.IsEnum)
+                    sb.AppendLine($"Enumeración: {t.Name}");
+                else if(t.IsInterface)
+                    sb.AppendLine($"Interface: {t.Name}");
+                else if(t.IsClass)
+                    sb.AppendLine($"Clase: {t.Name}");
+                else if(t.IsValueType)
+                    sb.AppendLine($"ValueType: {t.Name}");
+
+                if (t.IsEnum)
+                {
+                    var enumNames = t.GetEnumNames();
+                    if (enumNames.Length > 0)
+                    {
+                        indent += 4;
+                        for (var i = 0; i < enumNames.Length; i++)
+                        {
+                            sb.AppendLine($"{" ".PadLeft(indent)}{enumNames[i]}");
+                        }
+                        indent -= 4;
+                        sb.AppendLine();
+                    }
+                    // Produce los mismos resultados que GetEnumNames
+                    //var enumV = t.GetEnumValues();
+                    //if (enumV.Length > 0)
+                    //{
+                    //    indent += 4;
+                    //    for (var i = 0; i < enumV.Length; i++)
+                    //    {
+                    //        sb.AppendLine($"{" ".PadLeft(indent)}{enumV.GetValue(i)}");
+                    //    }
+                    //    indent -= 4;
+                    //    sb.AppendLine();
+                    //}
+                }
+
                 if (verbose)
                 {
                     if (t.IsGenericType)
@@ -270,7 +305,7 @@ namespace gsUtilidadesNET
                         indent -= 4;
                     }
 
-                    // GetConstructors method returns an array of objects of type ConstructorInfo.
+                    // Los constructores
                     ConstructorInfo[] constrInfo = t.GetConstructors();
                     if (constrInfo.Length > 0)
                     {
@@ -313,97 +348,97 @@ namespace gsUtilidadesNET
                             }
                             else
                                 sb.AppendLine($"{" ".PadLeft(indent+4)}Sin parámetros");
-
                         }
                         indent -= 8;
                     }
                 }
             }
-            if (mostrarTodo)
+            // Los campos 
+            var campos = t.GetFields();
+            if (!t.IsEnum && campos.Length > 0 && mostrarTodo)
             {
-                // Los campos 
-                var campos = t.GetFields();
-                if (campos.Length > 0)
+                indent += 4;
+                sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Campos:");
+                indent += 4;
+                for (var j = 0; j < campos.Length; j++)
                 {
-                    indent += 4;
-                    sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Campos:");
-                    indent += 4;
-                    for (var j = 0; j < campos.Length; j++)
+                    sb.Append($"{" ".PadLeft(indent)}{campos[j].FieldType.Name.Replace("System.", "")}");
+                    sb.AppendLine($" {campos[j].Name}");
+                    if (verbose)
                     {
-                        sb.Append($"{" ".PadLeft(indent)}{campos[j].FieldType.Name.Replace("System.", "")}");
-                        sb.AppendLine($" {campos[j].Name}");
-                        if (verbose)
-                        {
-                            if (campos[j].IsPrivate)
-                                sb.AppendLine($"{" ".PadLeft(indent)}IsPrivate = {campos[j].IsPrivate}");
-                            if (campos[j].IsPublic)
-                                sb.AppendLine($"{" ".PadLeft(indent)}IsPublic = {campos[j].IsPublic}");
-                            if (campos[j].IsStatic)
-                                sb.AppendLine($"{" ".PadLeft(indent)}IsStatic = {campos[j].IsStatic}");
-                            if (campos[j].IsInitOnly)
-                                sb.AppendLine($"{" ".PadLeft(indent)}IsInitOnly = {campos[j].IsInitOnly}");
-                        }
+                        if (campos[j].IsPrivate)
+                            sb.AppendLine($"{" ".PadLeft(indent)}IsPrivate = {campos[j].IsPrivate}");
+                        if (campos[j].IsPublic)
+                            sb.AppendLine($"{" ".PadLeft(indent)}IsPublic = {campos[j].IsPublic}");
+                        if (campos[j].IsStatic)
+                            sb.AppendLine($"{" ".PadLeft(indent)}IsStatic = {campos[j].IsStatic}");
+                        if (campos[j].IsInitOnly)
+                            sb.AppendLine($"{" ".PadLeft(indent)}IsInitOnly = {campos[j].IsInitOnly}");
                     }
-                    indent -= 8;
                 }
+                indent -= 8;
             }
-
-            if (mostrarPropiedades || mostrarTodo)
+            // Las propiedades
+            var propiedades = t.GetProperties();
+            if (propiedades.Length > 0 && (mostrarPropiedades || mostrarTodo))
             {
-                // Las propiedades
-                var propiedades = t.GetProperties();
-                if (propiedades.Length > 0)
+                indent += 4;
+                sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Propiedades:");
+                indent += 4;
+                for (var j = 0; j < propiedades.Length; j++)
                 {
-                    indent += 4;
-                    sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Propiedades:");
-                    indent += 4;
-                    for (var j = 0; j < propiedades.Length; j++)
-                    {
-                        sb.Append($"{" ".PadLeft(indent)}{propiedades[j].PropertyType.Name.Replace("System.", "")}");
-                        sb.AppendLine($" {propiedades[j].Name}");
-                        //sb.AppendLine($"{" ".PadLeft(indent)}{propiedades[j].Name}");
+                    sb.Append($"{" ".PadLeft(indent)}{propiedades[j].PropertyType.Name.Replace("System.", "")}");
+                    sb.AppendLine($" {propiedades[j].Name}");
+                    //sb.AppendLine($"{" ".PadLeft(indent)}{propiedades[j].Name}");
 
-                        if (verbose)
-                        {
-                            indent += 4;
-                            if (propiedades[j].CanRead)
-                                sb.AppendLine($"{" ".PadLeft(indent)}CanRead: {propiedades[j].CanRead}");
-                            if(propiedades[j].CanWrite)
-                                sb.AppendLine($"{" ".PadLeft(indent)}CanWrite: {propiedades[j].CanWrite}");
-                            indent -= 4;
-                        }
+                    if (verbose)
+                    {
+                        indent += 4;
+                        if (propiedades[j].CanRead)
+                            sb.AppendLine($"{" ".PadLeft(indent)}CanRead: {propiedades[j].CanRead}");
+                        if (propiedades[j].CanWrite)
+                            sb.AppendLine($"{" ".PadLeft(indent)}CanWrite: {propiedades[j].CanWrite}");
+                        indent -= 4;
                     }
-                    indent -= 8;
                 }
+                indent -= 8;
             }
-            if (mostrarMetodos || mostrarTodo)
+            // Los métodos
+            var metodos = t.GetMethods();
+            if (metodos.Length > 0 && (mostrarMetodos || mostrarTodo))
             {
-                // Los métodos
-                var metodos = t.GetMethods();
-                if (metodos.Length > 0)
+                indent += 4;
+                sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Métodos:");
+                indent += 4;
+                for (var j = 0; j < metodos.Length; j++)
                 {
-                    indent += 4;
-                    sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Métodos:");
-                    indent += 4;
-                    for (var j = 0; j < metodos.Length; j++)
+                    //if (metodos[j].IsHideBySig) break;
+                    if (metodos[j].Name.StartsWith("get_") || metodos[j].Name.StartsWith("set_"))
+                        continue;
+
+                    //sb.Append($"{" ".PadLeft(indent)}{metodos[j].MemberType}");
+                    try
                     {
-                        //if (metodos[j].IsHideBySig) break;
-                        if (metodos[j].Name.StartsWith("get_") || metodos[j].Name.StartsWith("set_"))
+                        if (string.IsNullOrEmpty(metodos[j].Name))
                             continue;
-
-                        sb.Append($"{" ".PadLeft(indent)}{metodos[j].MemberType}");
+                        // El tipo del método
+                        sb.Append($"{" ".PadLeft(indent)}{metodos[j].ReturnParameter.ToString().Replace("System.", "")}");
                         sb.AppendLine($" {metodos[j].Name}");
                         //sb.AppendLine($"{" ".PadLeft(indent)}{metodos[j].Name}");
+                    }
+                    catch { };
 
-                        if (verbose)
+                    if (verbose)
+                    {
+                        // Mostrar los argumentos
+                        try
                         {
-                            // Mostrar los argumentos
-                            try
+                            var parInfo = metodos[j].GetParameters();
+
+                            if (parInfo.Length > 0)
                             {
-                                var parInfo = metodos[j].GetParameters();
                                 indent += 4;
-                                if(parInfo.Length>0)
-                                    sb.Append($"{" ".PadLeft(indent)}Parámetros: ");
+                                sb.Append($"{" ".PadLeft(indent)}Parámetros: ");
                                 for (var k = 0; k < parInfo.Length; k++)
                                 {
                                     if (k > 0)
@@ -422,12 +457,39 @@ namespace gsUtilidadesNET
                                 sb.AppendLine();
                                 indent -= 4;
                             }
-                            catch { };
                         }
+                        catch { };
                     }
-                    indent -= 8;
                 }
+                indent -= 8;
             }
+            // Las interfaces
+            var interfaces = t.GetInterfaces();
+            if (interfaces.Length > 0)
+            {
+                indent += 4;
+                sb.AppendLine($"{" ".PadLeft(indent)}{t.Name}.Interfaces:");
+                indent += 4;
+                for (var j = 0; j < interfaces.Length; j++)
+                {
+                    // El tipo de
+                    //sb.Append($"{" ".PadLeft(indent)}{interfaces[j]. .ReturnParameter.ToString().Replace("System.", "")}");
+                    //sb.AppendLine($" {interfaces[j].Name}");
+                    sb.AppendLine($"{" ".PadLeft(indent)}{interfaces[j].Name}");
+                    var miembros = interfaces[j].GetMembers();
+                    if (miembros.Length > 0)
+                    {
+                        indent += 4;
+                        for (var k = 0; k < miembros.Length; k++)
+                        {
+                            sb.AppendLine($"{" ".PadLeft(indent)}{miembros[k].Name}");
+                        }
+                        indent -= 4;
+                    }
+                }
+                indent -= 8;
+            }
+
             return indent;
         }
 
@@ -462,6 +524,9 @@ opciones            Las opciones se pueden indicar con - o /
                         Predeterminado = no.
     pm              Muestra las propiedades y métodos.
                         Predeterminado = no.
+                    Nota:
+                    Las opciones -c -p -m o -pm se pueden combinar para mostrar los tipos que queramos.
+
     v[erbose]       Muestra detalles de las clases y propiedades/métodos:
                     En las clases muestra los constructores
                     En los métodos/propiedades muestra los argumentos.

@@ -4,24 +4,25 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>gsUtilidadesNET</RootNamespace>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.0.1</Version>
     <Description>Mostrar información del contenido de un ensamblado de .NET
 Versión para 64 bits (x64)
 
-(para .NET 5.0 revisión del 01-dic-2020)
+(para .NET 5.0 revisión del 02-dic-2020)
 
-v1.0.0.0 (01-dic-20) Primera compilación</Description>
+v1.0.0.1 (02-dic-20) Se muestran las interfaces y enumeraciones</Description>
     <Company>elGuille</Company>
     <Authors>Guillermo Som (elGuille)</Authors>
     <Copyright>Copyright Guillermo Som (elGuille), 2020</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <PackageTags>visual-basic vb c# dotnet net-core net-5 class-library utils utilidades reflection assembly</PackageTags>
-    <PackageReleaseNotes>v1.0.0.0 (01-dic-20) Primera compilación</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.0.0.1 (02-dic-20) Se muestran las interfaces y enumeraciones
+v1.0.0.0 (01-dic-20) Primera compilación</PackageReleaseNotes>
     <NeutralLanguage>Spanish (Spain)</NeutralLanguage>
     <Platforms>AnyCPU;x64</Platforms>
     <RepositoryUrl>https://github.com/elGuille-info/Mostrar-contenido-ensamblado</RepositoryUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>Mostrar-contenido-ensamblado</PackageId>
   </PropertyGroup>
 
