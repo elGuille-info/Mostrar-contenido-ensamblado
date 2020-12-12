@@ -1,5 +1,5 @@
 '-----------------------------------------------------------------------------
-' Mostrar contenido de clases usando Reflection versión de C#      (01/Dic/20)
+' Mostrar contenido de clases usando Reflection versión de VB      (01/Dic/20)
 '
 ' Convertido de C# a VB con CSharpToVB de Paul1956
 '   No pone Option Infer On y en los bucles no indica el tipo de datos
